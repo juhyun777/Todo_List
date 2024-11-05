@@ -4,6 +4,12 @@
 
 // 1. 누르면 부모 노드가 삭제된다
 
+// 먼저, task 클래스를 선택! .task 를 통해 클래스 선택 확인!
+// 선택한 클래스를 복제!
+// querySelector 로 뭐가 선택되는 지 보자!
+
+// 복제된 항목에 개별적인 값을 줘야하지 않을까?
+
 
 
 // 체크버튼을 누르면 할일이 끝난것으로 간주하고 밑줄이간다.
@@ -14,19 +20,36 @@
 
 let inputButton = document.getElementById("input-button")
 let inputText = document.getElementById("input-text")
-let originalDiv = document.getElementById("task-list")
-let taskClone = document.getElementById("task-clone")
+let taskList = document.getElementById("task-list")
+let task = document.querySelector(".task")
+let cloneList = document.getElementById("clone-list")
+let deleteButton = document.querySelector(".delete-button")
+let b = 0
 
 
+
+deleteButton.addEventListener("click", deleteItem)
 inputButton.addEventListener("click", addItem)
 
 function addItem(){
-    let clonedDiv = originalDiv.cloneNode(true)
-    taskClone.appendChild(clonedDiv)
+    
+    let cloneTask = task.cloneNode(true)
+    
+    cloneTask.childNodes[0].textContent = `task ${b}`
+    cloneList.append(cloneTask)
+    let cloneDelete = cloneTask.querySelector(".delete-button")
+    cloneDelete.addEventListener("click", function() {
+        cloneDelete.parentNode.parentNode.remove()
+    })
+    b++
+}
+
+function deleteItem(){
+    //deleteButton.parentNode.parentNode.remove()
+    console.log(deleteButton)
 }
 
 
-
-
+// 24.11.04 : 내일은 원본 task 를 숨기는 것과 input 을 받아 할 일 정하기!
 
 
